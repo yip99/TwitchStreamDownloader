@@ -59,6 +59,10 @@ function getAccessToken(id, authToken) {
                 }
             });
         });
+        req.setTimeout(3000, function () {
+            req.destroy();
+            reject(new Error('timeout: getAccessToken()'));
+        });
 
         req.on('error', (error) => reject(error));
         req.write(data);
@@ -88,6 +92,10 @@ function getPlaylist(id, accessToken) {
                         break;
                 }
             });
+        });
+        req.setTimeout(3000, function () {
+            req.destroy();
+            reject(new Error('timeout: getPlaylist()'));
         });
 
         req.on('error', (error) => reject(error));
@@ -132,6 +140,10 @@ function getFileContent(url) {
                 resolve(body);
             });
         });
+        req.setTimeout(3000, function () {
+            req.destroy();
+            reject(new Error('timeout: getFileContent'));
+        });
         req.on('error', (error) => reject(error));
         req.end();
     })
@@ -141,6 +153,10 @@ async function getFile(url) {
     return new Promise((resolve, reject) => {
         let req = https.get(url, { agent: false }, (response) => {
             resolve(response);
+        });
+        req.setTimeout(3000, function () {
+            req.destroy();
+            reject(new Error('timeout: getFile()'));
         });
         req.on('error', (error) => reject(error));
         req.end();
