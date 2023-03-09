@@ -331,8 +331,8 @@ let savePath = process.argv.indexOf('-savePath') != -1 ? process.argv[process.ar
 let authToken = process.argv.indexOf('-authToken') != -1 ? process.argv[process.argv.indexOf('-authToken') + 1] : undefined;
 
 if (typeof streamer === 'undefined') {
-    console.log('[REQUIRED] -streamer ${streamer} -savePath ${savePath}');
-    console.log('[OPTIONAL] -authToken ${authToken}');
+    console.log('[REQUIRED] -streamer [streamer/channel] -savePath [dir path]');
+    console.log('[OPTIONAL] -authToken [authToken]');
     process.exit();
 }
 
